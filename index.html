@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Palleli</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="resources.js"></script>
+
+</head>
+<body>
+<div id="wrapper">
+	<div id="score1" style="display: none;font-size: 2em;float:left;opacity:0.5;position: absolute; color:#fff; z-index: 100;">
+		Player 2: <span id="scorePlayer2">0</span>
+	</div>
+	<div style="display: none;font-size: 2em;float: right;opacity:0.5;position: absolute;right:0; color:#fff; z-index: 100;">
+		Player 1: <span id="scorePlayer1">0</span>
+	</div>
+	<div style="opacity:0.2; height: 300px;position: absolute; color:#fff; z-index: 100;font-weight: bolder; width: 100%; text-align: center;margin-top: 25px;">
+		<span style="font-size: 20px; font-family: 'Fatpixel'; text-transform: uppercase;">Score:</span><br>
+		<span style="font-size: 40px; font-family: 'Fatpixel'; line-height: 70px;" id="ball_in_play_count">0</span>
+	</div>
+	<div style="clear:both;"></div>
+	<div class="settings_on">
+		<div id="settings_container">
+			<h2>Settings:</h2>
+			<div id="options_container_2">
+				<button id="1_player" class="button_small" onclick="toggleMultiplayer('1_player');">1 Player</button>
+				<button id="2_players" class="button_small" onclick="toggleMultiplayer('2_player');">2 Players</button>
+				<div class="clear"></div>
+			</div>
+			<div id="options_container_2">
+				<button id="no_teamplay" class="button_small" onclick="toggleTeamplay('no_teamplay');">War</button>
+				<button id="teamplay" class="button_small" onclick="toggleTeamplay('teamplay');">Teamplay</button>
+				<div class="clear"></div>
+			</div>
+			<button class="button_small" onclick="toggleSettings();">Back</button>
+		</div>
+	</div>
+	<div class="menu_on">
+		<div id="menu_1">
+				<h1>Paddle</h1>
+				<button class="button_big" onclick="startGame();">start</button>
+				<button class="button_big" onclick="toggleSettings();">Settings</button>
+		</div>
+	</div>
+	<canvas id="canvas_id" style="background-color: green;"></canvas>
+</div>
+<script type="text/javascript" src="javascript.js"></script>
+
+</body>
+</html>
