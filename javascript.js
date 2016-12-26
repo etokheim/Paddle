@@ -91,7 +91,7 @@ window.onresize = function() {
 
 
 // ********************
-//   Sound effects! 
+//   Sound effects!
 // ********************
 // buffers automatically when created
 var sfxHitWall = new Audio("sfx/hitWall.mp3"),
@@ -102,7 +102,7 @@ var sfxHitWall = new Audio("sfx/hitWall.mp3"),
 
 
 // ********************
-//    Sprite Images 
+//    Sprite Images
 // ********************
 var bossSprite = new Image();
 bossSprite.src = "img/boss1.png";
@@ -179,23 +179,13 @@ function drawBall() {
 			// Update ball position
 			ballsArray[j].x += ballsArray[j].xms;
 			ballsArray[j].y += ballsArray[j].yms;
-			
+
 			// Reduce radius so that the ballsArray die after a few seconds
 			// ballsArray[j].radius = Math.max(ballsArray[j].radius - 0.05, 0.0);
 
-			// Update particle velocity
-			if(ballsArray[j].x > canvas.width/2 - ballsArray[j].radius) {
-				ballsArray[j].xms -= 0.2;
-			} else {
-				ballsArray[j].xms += 0.2;
-			}
-			if(ballsArray[j].y > canvas.height/2 - ballsArray[j].radius) {
-				ballsArray[j].yms -= 0.2;
-			} else {
-				ballsArray[j].yms += 0.2;
-			}
-			// ballsArray[j].xms -= ballsArray[j].xms * ballsArray[j].friction;
-			// ballsArray[j].yms -= ballsArray[j].yms * ballsArray[j].friction;
+			// Adds friction to the balls
+			ballsArray[j].xms -= ballsArray[j].xms * ballsArray[j].friction;
+			ballsArray[j].yms -= ballsArray[j].yms * ballsArray[j].friction;
 		} else {
 			// Remove the particle object from the array
 			ballsArray.splice(j, 1);
@@ -210,7 +200,7 @@ function drawBall() {
 var player1 = {
 	height: 100 * canvas.width/1000,
 	width: 25 * canvas.width/1000,
-	xDefault: canvas.width - (25 * canvas.width/1000)*3 + 10000,
+	xDefault: canvas.width - (25 * canvas.width/1000)*3,
 	yDefault: canvas.height/2 - (100 * canvas.width/1000)/2,
 	x: this.xDefault,
 	y: this.yDefault,
@@ -235,7 +225,7 @@ var player1 = {
 var player2 = {
 	height: 100 * canvas.width/1000,
 	width: 25 * canvas.width/1000,
-	xDefault: (25 * canvas.width/1000)*2 + 10000,
+	xDefault: (25 * canvas.width/1000)*2,
 	yDefault: canvas.height/2 - (100 * canvas.width/1000)/2,
 	x: this.xDefault,
 	y: this.yDefault,
@@ -344,7 +334,7 @@ function keyUpHandler(e) {
 	}
 	else if(e.keyCode == 40) {
 		player1.downPressed = false;
-	}   
+	}
 	else if(e.keyCode == 87) {
 		player2.wPressed = false;
 	}
@@ -391,20 +381,10 @@ function newBall() {
 	player2.x = player2.xDefault;
 	player2.y = player2.yDefault;
 
-	// Balls for debugging
-	createBall(canvas.width/2 - 10/2 + 300, 0, canvas.height/2 - 10/2 + 300, 0, 25, 1);
-	createBall(canvas.width/2 - 10/2 - 300, 0, canvas.height/2 - 10/2 - 300, 0, 25, 1);
-	createBall(canvas.width/2 - 10/2 - 300, 0, canvas.height/2 - 10/2 + 300, 0, 25, 1);
-	createBall(canvas.width/2 - 10/2 + 300, 0, canvas.height/2 - 10/2 - 300, 0, 25, 1);
-	createBall(canvas.width/2 - 10/2 + 300, 0, canvas.height/2 - 10/2 - 0, 0, 25, 1);
-	createBall(canvas.width/2 - 10/2 - 300, 0, canvas.height/2 - 10/2 - 0, 0, 25, 1);
-	createBall(canvas.width/2 - 10/2 - 0, 0, canvas.height/2 - 10/2 - 300, 0, 25, 1);
-	createBall(canvas.width/2 - 10/2 - 0, 0, canvas.height/2 - 10/2 + 300, 0, 25, 1);
-
-	// createBall(canvas.width/2 - 10/2, 0, canvas.height/2 - 10/2, 0, 10, 1);
+	createBall(canvas.width/2 - 10/2, 0, canvas.height/2 - 10/2, 0, 10, 1);
 	// Shoots the last ball created
-	// ballsArray[ballsArray.length - 1].xms = (Math.round(Math.random() * 5) + 7) * (Math.round(Math.random()) * 2 - 1) * canvas.width/1000;
-	// ballsArray[ballsArray.length - 1].yms = (Math.round(Math.random() * 2) + 4) * (Math.round(Math.random()) * 2 - 1) * canvas.width/1000;
+	ballsArray[ballsArray.length - 1].xms = (Math.round(Math.random() * 5) + 7) * (Math.round(Math.random()) * 2 - 1) * canvas.width/1000;
+	ballsArray[ballsArray.length - 1].yms = (Math.round(Math.random() * 2) + 4) * (Math.round(Math.random()) * 2 - 1) * canvas.width/1000;
 	console.log("New ball created! = " + ballsArray[0]);
 	player1.movement = true;
 	player2.movement = true;
@@ -472,14 +452,14 @@ function drawParticles() {
 			// Update particle position
 			particles[j].x += particles[j].vx;
 			particles[j].y += particles[j].vy;
-			
+
 			// Reduce radius so that the particles die after a few seconds
 			particles[j].radius = Math.max(particles[j].radius - 0.05, 0.0);
 
 			// Update particle velocity
 			particles[j].vx -= 0.01 * particles[j].vx;
 			particles[j].vy -= 0.01 * particles[j].vy;
-		}else{
+		} else {
 			// Remove the particle object from the array
 			particles.splice(j, 1);
 		}
@@ -487,7 +467,7 @@ function drawParticles() {
 }
 
 
-var boolDrawbossBall = true;
+var boolDrawbossBall = false;
 
 function newBoss(lvl) {
 	ball.storeXms = ball.xms;
@@ -517,7 +497,7 @@ function sprite (options) {
 		tickCount = 0,
 		ticksPerFrame = options.ticksPerFrame || 0,
 		numberOfFrames = options.numberOfFrames || 1;
-	
+
 	that.ctx = ctx;
 	that.width = options.width;
 	that.height = options.height;
@@ -525,7 +505,7 @@ function sprite (options) {
 	that.y = options.y || 0;
 	that.image = options.image;
 	that.scaleRatio = options.scaleRatio || 1;
-	
+
 	that.update = function () {
 
 		tickCount += 1;
@@ -533,9 +513,9 @@ function sprite (options) {
 		if (tickCount > ticksPerFrame) {
 
 			tickCount = 0;
-			
+
 			// If the current frame index is in range
-			if (frameIndex < numberOfFrames - 1) {	
+			if (frameIndex < numberOfFrames - 1) {
 				// Go to the next frame
 				frameIndex += 1;
 			} else {
@@ -543,7 +523,7 @@ function sprite (options) {
 			}
 		}
 	};
-	
+
 	that.render = function () {
 
 	  // Draw the animation
@@ -558,17 +538,14 @@ function sprite (options) {
 		that.width / numberOfFrames * that.scaleRatio,
 		that.height * that.scaleRatio);
 	};
-	
+
 	that.getFrameWidth = function () {
 		return that.width / numberOfFrames;
 	};
-	
+
 	return that;
 }
 
-	// For debugging :::::::::::::::::::::: Delete and replace with commented out in draw()
-	bossBall.y = canvas.height/2;
-	bossSprite.y = bossBall.y;
 
 function draw() {
 	requestAnimationFrame(draw);
@@ -581,7 +558,7 @@ function draw() {
 		drawParticles();
 
 		// For debugging
-		console.log("x = " + ballsArray[1].x + " y = " + ballsArray[1].y);
+		// console.log("Ball: x = " + ballsArray[0].x + " y = " + ballsArray[0].y);
 
 		// ctx.beginPath();
 		// ctx.moveTo(canvas.width / 2, canvas.height / 2);
@@ -593,10 +570,10 @@ function draw() {
 			bossSprite.update();
 			bossSprite.render();
 
-			// if(bossBall.y < canvas.height/2) {
-				// bossBall.y = bossBall.y + 3;
-				// bossSprite.y = bossBall.y;
-			// }
+			if(bossBall.y < canvas.height/2) {
+				bossBall.y = bossBall.y + 3;
+				bossSprite.y = bossBall.y;
+			}
 		}
 	}
 }
@@ -616,7 +593,8 @@ function game() {
 	// right side
 	for(i = 0; i < ballsArray.length; i++) {
 		if(ballsArray[i].x + ballsArray[i].xms > canvas.width + ballsArray[i].radius) {
-			ballsArray[i].xms = -ballsArray[i].xms;
+			// Destroys the ball
+			ballsArray.splice(i, 1);
 
 			player2Score++;
 			teamScore = 0;
@@ -628,13 +606,14 @@ function game() {
 			document.getElementById("ball_in_play_count").innerHTML = teamScore;
 
 			lastHit = null;
-			// newBall();
+			newBall();
 		}
-	
+
 
 		// left side
 		if(ballsArray[i].x + ballsArray[i].xms < 0 - ballsArray[i].radius) {
-			ballsArray[i].xms = -ballsArray[i].xms;
+			// Destroys the ball
+			ballsArray.splice(i, 1);
 
 			player1Score++;
 			teamScore = 0;
@@ -646,7 +625,7 @@ function game() {
 			document.getElementById("ball_in_play_count").innerHTML = teamScore;
 
 			lastHit = null;
-			// newBall();
+			newBall();
 		}
 
 		// top side
@@ -766,7 +745,7 @@ function game() {
 			particles[i].x += particles[i].vx;
 			particles[i].y += particles[i].vy;
 		}
-	}	
+	}
 
 
 	// :::BALL + BOSS COLLISION:::
@@ -779,10 +758,10 @@ function game() {
 
 			var bossVelocity = Math.sqrt(Math.pow(bossBall.xms, 2) + Math.pow(bossBall.yms, 2)) + 1; // alert +1 to avoid devide by zero
 			if(debugging) {console.log("bossVelocity = " + bossVelocity);}
-			
+
 			var thetaBall = Math.abs(Math.acos(ballsArray[i].xms / ballVelocity));
 			if(debugging) {console.log("thetaBall = " + thetaBall);}
-			
+
 			var thetaBoss = Math.abs(Math.acos(bossBall.xms / bossVelocity));
 			if(debugging) {console.log("thetaBoss = " + thetaBoss);}
 
