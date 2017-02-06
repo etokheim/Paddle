@@ -1,5 +1,10 @@
 # Paddle
-A fun little paddle game in the making. You can check out the game [here](https://etokheim.github.io/Paddle/) if you are interested :)
+A fun little paddle game in the making. If you are interested you can check out the game below, it's far from finished though :)
 
-# All rights reserved:
-Torstein Bjelland, Jens Kristian Bjelland and Erling Tokheim
+## [Play game online →](https://etokheim.github.io/Paddle/)
+
+# License
+Feel free to fork this repository and modify the code however you want. The code is licensed under the MIT license.
+
+# Contributors
+Jens Kristian Bjelland, Torstein Bjelland and Erling Tokheim
